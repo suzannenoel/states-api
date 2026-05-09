@@ -33,10 +33,11 @@ router.get('/:state', async (req, res) => {
         return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
     }
     const mongoState = await State.findOne({ stateCode: state.code });
+    const { funfacts, ...stateData } = state;
     if (mongoState && mongoState.funfacts.length > 0) {
-        return res.json({ ...state, funfacts: mongoState.funfacts });
+        return res.json({ ...stateData, funfacts: mongoState.funfacts });
     }
-    res.json(state);
+    res.json(stateData);
 });
 
 // GET random fun fact
