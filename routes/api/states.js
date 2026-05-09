@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 router.get('/:state', async (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     const mongoState = await State.findOne({ stateCode: state.code });
     const { funfacts, ...stateData } = state;
@@ -44,7 +44,7 @@ router.get('/:state', async (req, res) => {
 router.get('/:state/funfact', async (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     const mongoState = await State.findOne({ stateCode: state.code });
     if (!mongoState || mongoState.funfacts.length === 0) {
@@ -58,7 +58,7 @@ router.get('/:state/funfact', async (req, res) => {
 router.get('/:state/capital', (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     res.json({ state: state.state, capital: state.capital_city });
 });
@@ -67,7 +67,7 @@ router.get('/:state/capital', (req, res) => {
 router.get('/:state/nickname', (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     res.json({ state: state.state, nickname: state.nickname });
 });
@@ -76,7 +76,7 @@ router.get('/:state/nickname', (req, res) => {
 router.get('/:state/population', (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     res.json({ state: state.state, population: state.population.toLocaleString('en-US') });
 });
@@ -85,7 +85,7 @@ router.get('/:state/population', (req, res) => {
 router.get('/:state/admission', (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     res.json({ state: state.state, admitted: state.admission_date });
 });
@@ -94,7 +94,7 @@ router.get('/:state/admission', (req, res) => {
 router.post('/:state/funfact', async (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     const { funfacts } = req.body;
     if (!funfacts) {
@@ -118,7 +118,7 @@ router.post('/:state/funfact', async (req, res) => {
 router.patch('/:state/funfact', async (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     const { index, funfact } = req.body;
     if (!index) {
@@ -143,7 +143,7 @@ router.patch('/:state/funfact', async (req, res) => {
 router.delete('/:state/funfact', async (req, res) => {
     const state = verifyState(req.params.state);
     if (!state) {
-        return res.status(404).json({ message: `${req.params.state} is not a valid state abbreviation.` });
+        return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
     }
     const { index } = req.body;
     if (!index) {
